@@ -2,6 +2,7 @@ package com.example.asap_delivery.ui.login;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.asap_delivery.R;
 import com.example.asap_delivery.ProfileActivity;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -72,13 +74,14 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
+                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
+
             }
         });
 
@@ -131,6 +134,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();

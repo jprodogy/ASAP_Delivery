@@ -29,14 +29,16 @@
                     style="@style/profileDetailsImage" />
 
                 <TextView
-                    android:id="@+id/nameTextView"
+                    android:id="@+id/name_text_view"
                     android:text="Name"
                     android:layout_toRightOf="@id/nameImageView"
                 style="@style/profileDetailsTextMain" />
 
-                <TextView
+                <EditText
+                    android:id="@+id/name_text"
                     android:text="developer"
                     android:layout_toRightOf="@id/nameImageView"
+                    android:enabled="false"
                     style="@style/profileDetailsMiniText" />
 
             </RelativeLayout>
@@ -49,13 +51,16 @@
                     style="@style/profileDetailsImage" />
 
                 <TextView
+                    android:id="@+id/phone_text_view"
                     android:text="Mobile"
                     android:layout_toRightOf="@id/mobileImageView"
                     style="@style/profileDetailsTextMain"/>
 
-                <TextView
+                <EditText
+                    android:id="@+id/phone_text"
                     android:text="+91-8129999999"
                     android:layout_toRightOf="@id/mobileImageView"
+                    android:enabled="false"
                     style="@style/profileDetailsMiniText" />
 
             </RelativeLayout>
@@ -68,13 +73,17 @@
                     style="@style/profileDetailsImage" />
 
                 <TextView
+                    android:id="@+id/email_text_view"
+
                     android:text="Email"
                     android:layout_toRightOf="@id/emailImageView"
                     style="@style/profileDetailsTextMain" />
 
-                <TextView
+                <EditText
+                    android:id="@+id/email_text"
                     android:text="developer@appsnipp.com"
                     android:layout_toRightOf="@id/emailImageView"
+                    android:enabled="false"
                     style="@style/profileDetailsMiniText" />
 
             </RelativeLayout>
@@ -82,18 +91,22 @@
             <View style="@style/proifleDetailsView" />
             <RelativeLayout style="@style/profileDetailsLayout">
                 <ImageView
-                    android:id="@+id/addressImageView"
+                    android:id="@+id/seatImageView"
                     android:src="@drawable/ic_address"
                     style="@style/profileDetailsImage" />
 
                 <TextView
-                    android:text="Address"
-                    android:layout_toRightOf="@id/addressImageView"
+                    android:id="@+id/seat_text_view"
+                    android:text="Seat Number"
+                    android:layout_toRightOf="@id/seatImageView"
                     style="@style/profileDetailsTextMain" />
 
-                <TextView
+                <EditText
+                    android:id="@+id/seat_num_text"
                     android:text="Avenue 2nd Street NW SY."
-                    android:layout_toRightOf="@id/addressImageView"
+                    android:layout_toRightOf="@id/seatImageView"
+                    android:clickable="false"
+                    android:enabled="false"
                     style="@style/profileDetailsMiniText" />
 
             </RelativeLayout>
@@ -110,14 +123,20 @@
                     style="@style/profileDetailsImage" />
 
                 <TextView
-                    android:text="D.O.B"
+                    android:id="@+id/card_text_view"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/dobImageView"
-                    style="@style/profileDetailsTextMain" />
+                    android:text="Card Info" />
 
-                <TextView
-                    android:text="12-05-1990"
+                <EditText
+                    android:id="@+id/card_text"
+                    style="@style/profileDetailsMiniText"
                     android:layout_toRightOf="@id/dobImageView"
-                    style="@style/profileDetailsMiniText" />
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:text="6924 0417 3103 4729" />
 
             </RelativeLayout>
 

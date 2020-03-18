@@ -69,7 +69,8 @@
                             android:layout_alignParentTop="true"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:background="@drawable/profile_bk"/>
+                            android:background="@drawable/profile_bk"
+                            android:onClick="EditProfile"/>
 
                         <TextView
                             style="@style/profileStyledBackButton"
