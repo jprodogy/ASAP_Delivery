@@ -2,7 +2,8 @@ package com.example.asap_delivery.ui.login;
 
 import android.app.Activity;
 
-import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,10 +28,12 @@ import android.widget.Toast;
 
 import com.example.asap_delivery.R;
 import com.example.asap_delivery.ProfileActivity;
+import com.example.asap_delivery.Registration;
 
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String TAG = "LoginActivity";
     private LoginViewModel loginViewModel;
 
     @Override
@@ -71,6 +75,9 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
+                    Log.d(TAG, "Registration2: ");
+                    Registration();
+
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
@@ -145,5 +152,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+        Log.d("Registration1", "time to register");
+    }
+
+    public void Registration(){
+        Intent myIntent = new Intent(this, Registration.class);
+        startActivity(myIntent);
     }
 }

@@ -32,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void SelectFood(View v){
-        Intent intent = new Intent(this, MenuActivity.class);
+        Intent intent = new Intent(this, FoodMenuActivity.class);
         startActivity(intent);
     }
 
