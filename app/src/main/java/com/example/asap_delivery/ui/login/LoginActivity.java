@@ -27,6 +27,12 @@ import android.widget.Toast;
 import com.example.asap_delivery.R;
 import com.example.asap_delivery.ProfileActivity;
 import com.example.asap_delivery.Registration;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -47,12 +53,17 @@ public class LoginActivity extends AppCompatActivity {
         final Button chefButton = findViewById(R.id.chef_button);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
+        FileInputStream serviceAccount = null;
+
+
+
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
                 if (loginFormState == null) {
                     return;
                 }
+
                 loginButton.setEnabled(loginFormState.isDataValid());
                 chefButton.setEnabled(loginFormState.isDataValid());
                 if (loginFormState.getUsernameError() != null) {
@@ -70,13 +81,15 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult == null) {
                     return;
                 }
+
+
                 loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
                     Log.d(TAG, "Registration2: ");
                     Registration();
-
                 }
+
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                     Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
@@ -84,7 +97,6 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 setResult(Activity.RESULT_OK);
-
                 //Complete and destroy login activity once successful
 
             }
@@ -134,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
+                loginViewModel.loginChef(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
         });

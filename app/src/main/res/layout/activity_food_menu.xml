@@ -10,11 +10,57 @@
     tools:context="com.example.asap_delivery.FoodMenuActivity">
 
 
+    <SearchView
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search Food Item"
+        android:clickable="true"
+        android:focusedByDefault="false"/>
+
+    <TextView
+        android:id="@+id/menu_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_bar"
+        android:background="#F44336"
+        android:fontFamily="@font/alfa_slab_one"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Popular Food Items"
+        android:textSize="25sp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imagegallery"
         android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@+id/menu_title"/>
+
+    <TextView
+        android:id="@+id/menu_title2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quick Select"
+        android:textSize="25sp"
+        android:fontFamily="@font/alfa_slab_one"
+        android:layout_marginTop="15dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:background="#F44336"
+        android:layout_below="@id/imagegallery"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imagegallery2"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:layout_below="@+id/menu_title2"/>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/custom_button"
+        android:text="Review Order" />
+
 
 
 </RelativeLayout>
