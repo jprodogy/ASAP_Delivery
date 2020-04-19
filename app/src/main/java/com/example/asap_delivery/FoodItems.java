@@ -1,11 +1,11 @@
 package com.example.asap_delivery;
 
-public class Model {
+public class FoodItems {
 
     String title, image, description, price;
 
     //constructor
-    public Model(){}
+    public FoodItems(){}
 
     //getter and setters press Alt+Insert
 

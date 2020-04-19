@@ -15,30 +15,37 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asap_delivery.FoodMenuActivity;
+import com.example.asap_delivery.FoodItems;
 import com.example.asap_delivery.R;
+import com.example.asap_delivery.ui.login.LoginActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Queue;
 
 public class PostDetailActivity extends AppCompatActivity {
 
     TextView mTitleTv, mDetailTv;
     ImageView mImageIv;
-
     Bitmap bitmap;
-
     Button mSaveBtn, mShareBtn, mWallBtn;
-
     private static final int WRITE_EXTERNAL_STORAGE_CODE = 1;
+    public static Queue<List<FoodItems>> ordersQue = LoginActivity.ordersQue;
+    public static List<FoodItems> order = FoodMenuActivity.order;
+    public static Map<String, FoodItems> foodList = FoodMenuActivity.foodList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +64,7 @@ public class PostDetailActivity extends AppCompatActivity {
         mTitleTv = findViewById(R.id.titleTv);
         mDetailTv = findViewById(R.id.descriptionTv);
         mImageIv = findViewById(R.id.imageView);
-        mSaveBtn = findViewById(R.id.saveBtn);
+        mSaveBtn = findViewById(R.id.addOrderBtn);
         mShareBtn = findViewById(R.id.shareBtn);
         mWallBtn = findViewById(R.id.wallBtn);
 
@@ -130,8 +137,9 @@ public class PostDetailActivity extends AppCompatActivity {
         try {
             //get title and description and save in string s
             String s = mTitleTv.getText().toString() + "\n" + mDetailTv.getText().toString();
-
+            Log.d("string", s);
             File file = new File(getExternalCacheDir(), "sample.png");
+            Log.d("file", file.getName());
             FileOutputStream fOut = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
             fOut.flush();
@@ -161,6 +169,7 @@ public class PostDetailActivity extends AppCompatActivity {
         dir.mkdirs();
         //image name
         String imageName = timeStamp + ".PNG";
+        Log.d("TAG", imageName);
         File file = new File(dir, imageName);
         OutputStream out;
         try {
@@ -175,6 +184,8 @@ public class PostDetailActivity extends AppCompatActivity {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
     //handle onBackPressed(go to previous activity)
     @Override

@@ -23,7 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.asap_delivery.Model;
+import com.example.asap_delivery.FoodItems;
 import com.example.asap_delivery.R;
 import com.example.asap_delivery.ViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -84,15 +84,15 @@ public class PostListActivity extends AppCompatActivity {
 
         Query firebaseSearchQuery = mRef.orderByChild("search").startAt(query).endAt(query + "\uf8ff");
 
-        FirebaseRecyclerAdapter<Model, ViewHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<Model, ViewHolder>(
-                        Model.class,
+        FirebaseRecyclerAdapter<FoodItems, ViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<FoodItems, ViewHolder>(
+                        FoodItems.class,
                         R.layout.row,
                         ViewHolder.class,
                         firebaseSearchQuery
                 ) {
                     @Override
-                    protected void populateViewHolder(ViewHolder viewHolder, Model model, int position) {
+                    protected void populateViewHolder(ViewHolder viewHolder, FoodItems model, int position) {
                         viewHolder.setDetails(getApplicationContext(), model.getTitle(), model.getDescription(), model.getImage());
                     }
 
@@ -147,15 +147,15 @@ public class PostListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<Model, ViewHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<Model, ViewHolder>(
-                        Model.class,
+        FirebaseRecyclerAdapter<FoodItems, ViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<FoodItems, ViewHolder>(
+                        FoodItems.class,
                         R.layout.row,
                         ViewHolder.class,
                         mRef
                 ) {
                     @Override
-                    protected void populateViewHolder(ViewHolder viewHolder, Model model, int position) {
+                    protected void populateViewHolder(ViewHolder viewHolder, FoodItems model, int position) {
                         viewHolder.setDetails(getApplicationContext(), model.getTitle(), model.getDescription(), model.getImage());
                     }
 

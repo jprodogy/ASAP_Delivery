@@ -24,6 +24,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.asap_delivery.FoodItems;
+import com.example.asap_delivery.NavDrawerActivity;
 import com.example.asap_delivery.R;
 import com.example.asap_delivery.ProfileActivity;
 import com.example.asap_delivery.Registration;
@@ -33,12 +35,17 @@ import com.google.firebase.FirebaseOptions;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
     private LoginViewModel loginViewModel;
+    public static Queue<List<FoodItems>> ordersQue = new LinkedList();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginFormState.getPasswordError() != null) {
                     passwordEditText.setError(getString(loginFormState.getPasswordError()));
                 }
+
             }
         });
 
@@ -82,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-
                 loadingProgressBar.setVisibility(View.GONE);
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
@@ -90,7 +97,12 @@ public class LoginActivity extends AppCompatActivity {
                     Registration();
                 }
 
-                if (loginResult.getSuccess() != null) {
+                if (loginResult.getSuccess() != null && loginResult.getIsChef() == true) {
+                    updateUiWithUser(loginResult.getSuccess());
+                    Intent intent = new Intent(LoginActivity.this, NavDrawerActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                     Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                     startActivity(intent);
@@ -101,6 +113,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override

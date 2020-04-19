@@ -1,6 +1,7 @@
 package com.example.asap_delivery.data;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 /**
@@ -46,10 +49,7 @@ public class LoginDataSource extends AppCompatActivity {
                         }
                     });
 
-            LoggedInUser fakeUser =
-                    new LoggedInUser(
-                            UUID.randomUUID().toString(),
-                            username.split("@")[0]);
+            LoggedInUser fakeUser = new LoggedInUser(UUID.randomUUID().toString(), username.split("@")[0]);
             return new Result.Success<>(fakeUser);
         } catch (Exception e) {
 
@@ -59,9 +59,11 @@ public class LoginDataSource extends AppCompatActivity {
     }
 
     public Result<LoggedInUser> loginChef(String username, String password) {
-
+        final ArrayList<String> chefList = new ArrayList<String>(Arrays.asList("jboudre1", "jaboudreauxjr"));
+        final String userName = username.split("@")[0];
         try {
             // TODO: handle loggedInUser authentication
+
             auth.signInWithEmailAndPassword(username, password)
                     .addOnCompleteListener(LoginDataSource.this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -69,30 +71,14 @@ public class LoginDataSource extends AppCompatActivity {
                             // If sign in fails, display a message to the user. If sign in succeeds
                             // the auth state listener will be notified and logic to handle the
                             // signed in user can be handled in the listener.
-                            if (!task.isSuccessful()) {
-
-
+                            if (!task.isSuccessful() || !chefList.contains(userName)) {
                                 // there was an error
                                 Toast.makeText(LoginDataSource.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                             }
                         }
                     });
-/*
-            FirebaseUser user = FirebaseAuth.getInstance().getUser();
 
-            user.getIdToken(false).addOnSuccessListener(new OnSuccessListener<GetTokenResult>() {
-                @Override
-                public void onSuccess(GetTokenResult result) {
-                    boolean isAdmin = result.getClaims().get("admin");
-                    if (!isAdmin) {
-                        Toast.makeText(LoginDataSource.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-
- */
-
-            LoggedInUser fakeUser = new LoggedInUser(java.util.UUID.randomUUID().toString(), username.split("@")[0]);
+            LoggedInUser fakeUser = new LoggedInUser(java.util.UUID.randomUUID().toString(), username.split("@")[0], true);
             return new Result.Success<>(fakeUser);
         } catch (Exception e) {
 

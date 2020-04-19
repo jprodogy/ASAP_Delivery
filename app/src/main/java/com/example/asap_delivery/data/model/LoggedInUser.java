@@ -7,10 +7,16 @@ public class LoggedInUser {
 
     private String userId;
     private String displayName;
+    private Boolean isChef = false;
 
     public LoggedInUser(String userId, String displayName) {
         this.userId = userId;
         this.displayName = displayName;
+    }
+    public LoggedInUser(String userId, String displayName, Boolean isChef) {
+        this.userId = userId;
+        this.displayName = displayName;
+        this.isChef = isChef;
     }
 
     public String getUserId() {
@@ -20,4 +26,6 @@ public class LoggedInUser {
     public String getDisplayName() {
         return displayName;
     }
+
+    public Boolean getIsChef(){return isChef;}
 }
