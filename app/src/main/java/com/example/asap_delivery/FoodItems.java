@@ -1,8 +1,13 @@
 package com.example.asap_delivery;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class FoodItems {
 
-    String title, image, description, price;
+    String title, image, description, price, type;
+    List<String> keywords;
 
     //constructor
     public FoodItems(){}
@@ -25,6 +30,12 @@ public class FoodItems {
         this.image = image;
     }
 
+    public void setKeywords(String keywords){
+        this.keywords = Arrays.asList(keywords.split("/"));
+    }
+
+    public void setType(String type){ this.type = type;}
+
     public String getDescription() {
         return description;
     }
@@ -37,5 +48,8 @@ public class FoodItems {
 
     public void setPrice(String price){ this.price = price;}
 
+    public String getType(){return type;}
+
+    public List<String> getKeywords(){return keywords;}
 
 }

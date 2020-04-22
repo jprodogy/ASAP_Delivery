@@ -36,6 +36,7 @@ public class FoodMenuActivity extends AppCompatActivity implements SearchView.On
     RecyclerView recyclerView2;
     private SearchView searchBar;
     private DatabaseReference mRef;
+    private DatabaseReference mRef2;
     private FirebaseDatabase mFirebaseDatabase;
     public static List<FoodItems> order;
     public static Map<String, FoodItems> foodList;
@@ -86,6 +87,9 @@ public class FoodMenuActivity extends AppCompatActivity implements SearchView.On
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         mRef = mFirebaseDatabase.getReference("Data");
+        mRef2 = mFirebaseDatabase.getReference("Data2");
+
+
 
         searchBar = findViewById(R.id.search_bar);
 
@@ -106,7 +110,6 @@ public class FoodMenuActivity extends AppCompatActivity implements SearchView.On
 
         searchBar.setOnQueryTextListener(this);
 
-
     }
     private ArrayList<CreateList> prepareData(){
 
@@ -123,6 +126,7 @@ public class FoodMenuActivity extends AppCompatActivity implements SearchView.On
     @Override
     public boolean onQueryTextSubmit(String s) {
         Intent myIntent = new Intent(this, SearchMenuActivity.class);
+        myIntent.putExtra("Keyword", s);
         startActivity(myIntent);
         return false;
     }
@@ -148,6 +152,8 @@ public class FoodMenuActivity extends AppCompatActivity implements SearchView.On
                         viewHolder.setDetails(getApplicationContext(), food.getTitle(), food.getDescription(), food.getImage());
                         foodList.put(food.title, food);
                     }
+
+
 
                     @Override
                     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -8,8 +8,8 @@ import android.util.Patterns;
 
 import com.example.asap_delivery.data.LoginRepository;
 import com.example.asap_delivery.data.Result;
-import com.example.asap_delivery.data.model.LoggedInUser;
 import com.example.asap_delivery.R;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginViewModel extends ViewModel {
 
@@ -32,11 +32,11 @@ public class LoginViewModel extends ViewModel {
 
     public void login(String username, String password) {
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.login(username, password);
+        Result<FirebaseUser> result = loginRepository.login(username, password);
 
         if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+            FirebaseUser data = ((Result.Success<FirebaseUser>) result).getData();
+            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getEmail())));
         } else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
 
@@ -45,11 +45,11 @@ public class LoginViewModel extends ViewModel {
 
     public void loginChef(String username, String password) {
         // can be launched in a separate asynchronous job
-        Result<LoggedInUser> result = loginRepository.loginChef(username, password);
+        Result<FirebaseUser> result = loginRepository.loginChef(username, password);
 
         if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName()), data.getIsChef()));
+            FirebaseUser data = ((Result.Success<FirebaseUser>) result).getData();
+            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getEmail())));
         } else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
 

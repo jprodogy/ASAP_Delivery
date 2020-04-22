@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".data.LoginDataSource"></activity>
         <activity android:name=".FoodDetailActivity"></activity>
         <activity
             android:name=".NavDrawerActivity"

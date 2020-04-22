@@ -1,6 +1,6 @@
 package com.example.asap_delivery.data;
 
-import com.example.asap_delivery.data.model.LoggedInUser;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -14,7 +14,7 @@ public class LoginRepository {
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
-    private LoggedInUser user = null;
+    private FirebaseUser user = null;
 
     // private constructor : singleton access
     private LoginRepository(LoginDataSource dataSource) {
@@ -37,26 +37,26 @@ public class LoginRepository {
         dataSource.logout();
     }
 
-    private void setLoggedInUser(LoggedInUser user) {
+    private void setLoggedInUser(FirebaseUser user) {
         this.user = user;
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<FirebaseUser> login(String username, String password) {
         // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password);
+        Result<FirebaseUser> result = dataSource.login(username, password);
         if (result instanceof Result.Success) {
-            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+            setLoggedInUser(((Result.Success<FirebaseUser>) result).getData());
         }
         return result;
     }
 
-    public Result<LoggedInUser> loginChef(String username, String password) {
+    public Result<FirebaseUser> loginChef(String username, String password) {
         // handle login
-        Result<LoggedInUser> result = dataSource.loginChef(username, password);
+        Result<FirebaseUser> result = dataSource.login(username, password);
         if (result instanceof Result.Success) {
-            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+            setLoggedInUser(((Result.Success<FirebaseUser>) result).getData());
         }
         return result;
     }

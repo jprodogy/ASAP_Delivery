@@ -39,11 +39,13 @@
                     android:background="@drawable/profile_bk">
 
                     <ImageView
+                        android:id="@+id/user_picture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/profile_round" />
 
                     <TextView
+                        android:id="@+id/username_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="\@appsnippuser"
@@ -65,14 +67,14 @@
                         android:layout_marginTop="20dp"
                         android:background="@color/profileBackground">
 
-                        <ImageButton
+                        <ImageView
                             android:layout_alignParentTop="true"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
-                            android:background="@drawable/profile_bk"
-                            android:onClick="EditProfile"/>
+                            android:background="@drawable/profile_bk"/>
 
-                        <TextView
+                        <Button
+                            android:id="@+id/edit_profile_btn"
                             style="@style/profileStyledBackButton"
                             android:text="Edit Profile" />
 

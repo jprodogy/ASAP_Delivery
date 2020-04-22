@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -61,5 +62,6 @@ public class FoodDetailActivity extends AppCompatActivity {
 
     private void addToOrder(){
         order.add(foodList.get(mTitleTv));
+        Toast.makeText(getApplicationContext(), "Added to Cart", Toast.LENGTH_LONG).show();
     }
 }
