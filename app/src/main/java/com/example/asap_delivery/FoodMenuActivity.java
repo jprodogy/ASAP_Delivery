@@ -18,8 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asap_delivery.extra.PostDetailActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -41,40 +45,6 @@ public class FoodMenuActivity extends AppCompatActivity implements SearchView.On
     public static List<FoodItems> order;
     public static Map<String, FoodItems> foodList;
 
-    private final String image_titles[] = {
-            "Img1",
-            "Img2",
-            "Img3",
-            "Img4",
-            "Img5",
-            "Img6",
-            "Img7",
-            "Img8",
-
-
-    };
-
-    private final Integer image_ids[] = {
-            R.drawable.img1,
-            R.drawable.img2,
-            R.drawable.img3,
-            R.drawable.img4,
-            R.drawable.img5,
-            R.drawable.img6,
-            R.drawable.img7,
-            R.drawable.img8,
-    };
-
-    private final Integer image_ids2[] = {
-            R.drawable.img1,
-            R.drawable.img2,
-            R.drawable.img3,
-            R.drawable.img4,
-            R.drawable.img5,
-            R.drawable.img6,
-            R.drawable.img7,
-            R.drawable.img8,
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +58,23 @@ public class FoodMenuActivity extends AppCompatActivity implements SearchView.On
 
         mRef = mFirebaseDatabase.getReference("Data");
         mRef2 = mFirebaseDatabase.getReference("Data2");
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    FoodItems food = snapshot.getValue(FoodItems.class);
+                    foodList.put(food.title, food);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
 
 
@@ -103,25 +90,11 @@ public class FoodMenuActivity extends AppCompatActivity implements SearchView.On
         recyclerView.setLayoutManager(layoutManager);
         recyclerView2.setLayoutManager(layoutManager2);
 
-        ArrayList<CreateList> createLists = prepareData();
-        MyAdapter adapter = new MyAdapter(getApplicationContext(), createLists);
-        recyclerView.setAdapter(adapter);
-        recyclerView2.setAdapter(adapter);
 
         searchBar.setOnQueryTextListener(this);
 
     }
-    private ArrayList<CreateList> prepareData(){
 
-        ArrayList<CreateList> theimage = new ArrayList<>();
-        for(int i = 0; i< image_titles.length; i++){
-            CreateList createList = new CreateList();
-            createList.setImage_title(image_titles[i]);
-            createList.setImage_ID(image_ids[i]);
-            theimage.add(createList);
-        }
-        return theimage;
-    }
 
     @Override
     public boolean onQueryTextSubmit(String s) {
@@ -150,7 +123,7 @@ public class FoodMenuActivity extends AppCompatActivity implements SearchView.On
                     @Override
                     protected void populateViewHolder(ViewHolder viewHolder, FoodItems food, int position) {
                         viewHolder.setDetails(getApplicationContext(), food.getTitle(), food.getDescription(), food.getImage());
-                        foodList.put(food.title, food);
+                        Log.d(TAG, food.getTitle());
                     }
 
 
@@ -197,6 +170,7 @@ public class FoodMenuActivity extends AppCompatActivity implements SearchView.On
                     }
 
                 };
+
 
         //set adapter to recyclerview
         recyclerView.setAdapter(firebaseRecyclerAdapter);

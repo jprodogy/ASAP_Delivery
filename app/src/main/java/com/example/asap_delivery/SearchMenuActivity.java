@@ -47,6 +47,7 @@ public class SearchMenuActivity extends AppCompatActivity {
         String searchWord = getIntent().getStringExtra("Keyword");
         List<String> foundFood = new ArrayList();
         for (FoodItems food: foodList.values()){
+            Log.d(TAG, food.title + " " + food.keywords.toString() + " " + searchWord);
             if (food.keywords.contains(searchWord.toLowerCase())){
                 foundFood.add(food.title);
             }
