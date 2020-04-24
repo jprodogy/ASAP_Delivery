@@ -200,9 +200,10 @@ public class FirebaseExamples extends AppCompatActivity {
                     }
                 });
 
+        /*
         FirebaseImageAdapter firebaseImageAdapter = new FirebaseImageAdapter(getApplicationContext(), storageList);
         Log.d(TAG, String.valueOf(firebaseImageAdapter.getItemCount()));
         recyclerView.setAdapter(firebaseImageAdapter);
-
+*/
     }
 }

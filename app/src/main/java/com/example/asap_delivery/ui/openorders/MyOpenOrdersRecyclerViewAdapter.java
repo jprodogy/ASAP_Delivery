@@ -7,23 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.asap_delivery.FoodItems;
 import com.example.asap_delivery.R;
 import com.example.asap_delivery.ui.openorders.OpenOrdersFragment.OnListFragmentInteractionListener;
-import com.example.asap_delivery.ui.openorders.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyOpenOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOpenOrdersRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<FoodItems> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyOpenOrdersRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyOpenOrdersRecyclerViewAdapter(List<FoodItems> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -38,8 +38,8 @@ public class MyOpenOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOpen
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mIdView.setText(mValues.get(position).getTitle());
+        holder.mContentView.setText(mValues.get(position).getImage());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +62,7 @@ public class MyOpenOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOpen
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public DummyItem mItem;
+        public FoodItems mItem;
 
         public ViewHolder(View view) {
             super(view);

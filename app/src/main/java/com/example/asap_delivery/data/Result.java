@@ -23,13 +23,21 @@ public class Result<T> {
     // Success sub-class
     public final static class Success<T> extends Result {
         private T data;
+        private T chef;
 
         public Success(T data) {
             this.data = data;
         }
+        public Success(T data, T chef) {
+            this.data = data;
+            this.chef = chef;
+        }
 
         public T getData() {
             return this.data;
+        }
+        public T getChef() {
+            return this.chef;
         }
     }
 

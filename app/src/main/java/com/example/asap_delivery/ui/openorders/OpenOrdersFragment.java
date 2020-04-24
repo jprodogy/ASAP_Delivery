@@ -12,11 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.asap_delivery.FoodItems;
 import com.example.asap_delivery.R;
-import com.example.asap_delivery.ui.openorders.dummy.DummyContent;
-import com.example.asap_delivery.ui.openorders.dummy.DummyContent.DummyItem;
-
-import java.util.List;
+import com.example.asap_delivery.ui.openorders.dummy.FoodContent;
 
 /**
  * A fragment representing a list of Items.
@@ -72,7 +70,7 @@ public class OpenOrdersFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyOpenOrdersRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyOpenOrdersRecyclerViewAdapter(FoodContent.ITEMS, mListener));
         }
         return view;
     }
@@ -108,6 +106,6 @@ public class OpenOrdersFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(FoodItems item);
     }
 }

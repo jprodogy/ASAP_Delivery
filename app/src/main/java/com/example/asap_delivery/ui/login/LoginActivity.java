@@ -31,6 +31,7 @@ import com.example.asap_delivery.ProfileActivity;
 import com.example.asap_delivery.Registration;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,12 +46,13 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private LoginViewModel loginViewModel;
     public static Queue<List<FoodItems>> ordersQue = new LinkedList();
-
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mAuth.signOut();
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
@@ -61,8 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
 
         FileInputStream serviceAccount = null;
-
-
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -101,15 +101,12 @@ public class LoginActivity extends AppCompatActivity {
                     updateUiWithUser(loginResult.getSuccess());
                     Intent intent = new Intent(LoginActivity.this, NavDrawerActivity.class);
                     startActivity(intent);
-                    finish();
                 }else if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
                     Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                     startActivity(intent);
-                    finish();
                 }
                 setResult(Activity.RESULT_OK);
-                //Complete and destroy login activity once successful
 
             }
         });
@@ -164,6 +161,7 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         });
+
     }
 
 

@@ -54,7 +54,7 @@ public class LoginRepository {
 
     public Result<FirebaseUser> loginChef(String username, String password) {
         // handle login
-        Result<FirebaseUser> result = dataSource.login(username, password);
+        Result<FirebaseUser> result = dataSource.loginChef(username, password);
         if (result instanceof Result.Success) {
             setLoggedInUser(((Result.Success<FirebaseUser>) result).getData());
         }

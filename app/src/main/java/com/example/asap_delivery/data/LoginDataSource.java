@@ -22,6 +22,9 @@ import com.google.firebase.internal.api.FirebaseNoSignedInUserException;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
@@ -32,8 +35,8 @@ import static com.google.firebase.remoteconfig.FirebaseRemoteConfig.TAG;
  */
 public class LoginDataSource extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    public Result<FirebaseUser> login(String username, String password) {
 
+    public Result<FirebaseUser> login(String username, String password) {
         try {
             Log.d(TAG, "login: ");
             mAuth.signInWithEmailAndPassword(username, password)
@@ -50,9 +53,12 @@ public class LoginDataSource extends AppCompatActivity {
                             }
                         }
                     });
+
             FirebaseUser user = mAuth.getCurrentUser();
-            Log.d("bruh", user.getEmail());
-            Boolean s = true;
+            Log.d("wtf", "login: ");
+            if (user == null){
+                throw new Exception("Exception message");
+            }
             return new Result.Success<>(user);
         } catch (Exception e) {
             return new Result.Error(new FirebaseException("Error logging in", e));
@@ -61,9 +67,8 @@ public class LoginDataSource extends AppCompatActivity {
     }
 
     public Result<FirebaseUser> loginChef(String username, String password) {
-
+        List<String> chefList = Arrays.asList("50mVYlzJiEhwMmjY3b1j5snojEs1");
         try {
-            Log.d(TAG, "login: ");
             mAuth.signInWithEmailAndPassword(username, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -80,8 +85,13 @@ public class LoginDataSource extends AppCompatActivity {
                         }
                     });
 
+
+
             FirebaseUser user = mAuth.getCurrentUser();
-            return new Result.Success<>(user);
+            if (!chefList.contains(user.getUid())){
+                throw new Exception("Exception message");
+            }
+            return new Result.Success<>(user, true);
         } catch (Exception e) {
             return new Result.Error(new IOException("Error logging in", e));
         }

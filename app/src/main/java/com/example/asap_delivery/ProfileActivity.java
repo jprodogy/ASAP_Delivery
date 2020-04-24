@@ -113,9 +113,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         public void onCancelled(DatabaseError databaseError) {
             notifyUser("Database error: " + databaseError.toException());
         }
-
-
-
     };
 
     public void saveData() {

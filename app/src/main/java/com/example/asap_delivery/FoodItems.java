@@ -11,6 +11,12 @@ public class FoodItems {
     //constructor
     public FoodItems(){}
 
+    public FoodItems(String title, String image, String description) {
+        this.title = title;
+        this.image = image;
+        this.description = description;
+    }
+
     //getter and setters press Alt+Insert
 
     public String getTitle() {

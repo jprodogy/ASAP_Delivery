@@ -38,7 +38,6 @@ public class FirebaseImageAdapter extends RecyclerView.Adapter<FirebaseImageAdap
 
         viewHolder.title.setText(galleryList.get(i).getName());
         viewHolder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        Log.d("bruh", galleryList.toString());
         Glide.with(this.context)
                 .load(galleryList.get(i))
                 .into(viewHolder.img);
